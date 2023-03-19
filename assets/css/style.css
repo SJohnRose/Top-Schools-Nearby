@@ -1,0 +1,13 @@
+#dist-section, #afford-section, #rating-section {
+    display:flex;
+    height: 270px;
+    width: 100%;
+    background-color: bisque;
+}
+
+.top3-heading {
+    font-size: 20px;
+    color:rgb(4, 4, 84);
+    font-weight: bold;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
