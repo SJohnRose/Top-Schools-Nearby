@@ -7,7 +7,7 @@ const listSchoolsDivEl = document.getElementById("list-schools");
 // Function to get weather data from Open Weather Map API
 function getApi() {
     var suburbName = cityInputEl.value;
-    var requestUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAk91w3HUMHmGr0LsXGiLAif5ZqM6vofjU&libraries=places";
+    var requestUrl = "https://maps.googleapis.com/maps/api/js?key=&libraries=places";
     fetch(requestUrl)
         .then((response) => response.json())
         .then((data) => { populateData(data);});
