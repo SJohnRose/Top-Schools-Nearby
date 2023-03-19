@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <title>Top Schools Nearby</title>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400&family=Merriweather:wght@700&display=swap"
     rel="stylesheet" />
@@ -11,15 +12,49 @@
 </head>
 
 <body>
-  <div class="flex-row align-center justify-center min-100-vh bg-primary">
-    <div class="col-12 col-md-9 flex-column align-center bg-light p-5">
-      <h1 class="text-primary">Test</h1>
-      <form id="search-form" class="form w-100">
-        <input id="search-input" class="form-input w-100" type="text" placeholder="Search!">
-        <button class="btn btn-info btn-block">Click Me</button>
-      </form>
-    </div>
+    <section class="hero is-warning">
+  <div class="hero-body">
+    <p class="title block">
+      Top Schools Nearby
+    </p>
+    <p class="subtitle block">
+      Are you looking for a good school for your child in your suburb?
+    </p>
   </div>
+</section>
+<div class="columns is-mobile block">
+    <div class="column is-one-third is-mobile">
+        <div class="box">
+        <form id="search-form" class="form ">
+            <input id="search-input" class="input is-link" type="text" placeholder="Search!">
+            <button class="button is-link is-medium is-rounded is-full-width">Click Me</button>
+          </form>
+        </div>  
+     
+    </div>
+    <div class="column is-mobile">
+        <!-- <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">
+                Card header
+              </p>
+              <button class="card-header-icon" aria-label="more options">
+                <span class="icon">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </header>
+          </div> -->
+          <!-- <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+              </figure>
+            </div>
+          </div> -->
+    </div>
+ </div>
+  
 
   <script src="./assets/js/script.js"></script>
 </body>
