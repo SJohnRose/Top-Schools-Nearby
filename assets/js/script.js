@@ -1,9 +1,10 @@
 
 var searchButton = document.getElementById('search-btn');
 var cityInputEl = document.getElementById("search-input");
+var optionInputEl = document.getElementById("school-type");
 var distCardsDivEl = document.getElementById("dist-cards");
 var cardTemplateDivEl = document.getElementById("card-template");
-var schoolCount = 0;
+
 
 
 // Function to get data from Google Maps API
@@ -21,7 +22,6 @@ function populateData(places, map) {
   while(distCardsDivEl.hasChildNodes()) {
     distCardsDivEl.removeChild(distCardsDivEl.firstChild);
   }
-  schoolCount = 0;
   for(var place of places) {
     if (place.geometry && place.geometry.location) {
       addSchool(place);
@@ -121,7 +121,8 @@ function getLocationData(locationName) {
 
 // Get schools information from Google maps 
 function getSchoolsNearby(results, status) {
-  console.log("getSchools called");
+  //console.log("getSchools called");
+  var schoolSelect, schoolType;
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     locationResult = results[0];
     const currentSearchLocation = {lat: locationResult.geometry.location.lat(), lng: locationResult.geometry.location.lng()};
@@ -131,10 +132,17 @@ function getSchoolsNearby(results, status) {
       mapID: "8d193001f940fde3",
     });
     const service = new google.maps.places.PlacesService(map);
+    schoolSelect = optionInputEl.value;
+    if (schoolSelect === "Primary School") {
+      schoolType = "primary_school";
+    }
+    else if (schoolSelect === "Secondary School") {
+      schoolType = "secondary_school";
+    }
     searchParams = {
       location: currentSearchLocation,
       radius: 5000,
-      type: "school"
+      type: schoolType
     }
     service.nearbySearch(searchParams, (results, status, pagination) => {
       //console.log(results);

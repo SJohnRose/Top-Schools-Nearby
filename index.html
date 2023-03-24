@@ -24,14 +24,23 @@
     </section>
     <div class="columns is-mobile block">
         <div class="column is-one-third is-mobile">
-            <!-- <form id="search-form" class="form box"> -->
-                <div class="control">
-                    <input id="search-input" class="input is-link" type="text" placeholder="Search!">
-                </div>
-                <button id="search-btn" class="button is-link is-medium is-rounded is-full-width">Click Me</button>
-                <div id="map"></div>
-            <!-- </form> -->
-        
+            <h3> Enter suburb name </h3>
+            <div class="control">
+                <input id="search-input" class="input is-link" type="text" placeholder="Search!">
+            </div>
+            <h3> Choose school level </h3>
+            <div class="select is-info">
+                <select id="school-type">
+                  <option>Primary School</option>
+                  <option>Secondary School</option>
+                </select>
+            </div>
+            <div>
+                <button id="search-btn" class="button is-info is-medium is-fullwidth">Search</button>
+            </div>
+            <div id="map">
+
+            </div>
         </div>
 
         <div class="column is-mobile">
