@@ -12,13 +12,13 @@
 </head>
 
 <body>
-    <section class="hero is-warning">
+    <section class="hero">
         <div class="hero-body">
             <p class="title block">
                 Top Schools Nearby
             </p>
             <p class="subtitle block">
-                Are you looking for a good school for your child in your suburb?
+                Are you looking for a good school in your suburb?
             </p>
         </div>
     </section>
@@ -47,36 +47,25 @@
             <div id="dist-section">
                 
                     <div id = "dist-cards" class = "columns is-multiline is-mobile is-flex">
-                        <div class="column is-one-quarter card mt-5 mr-6 ml-6">
-                            <header class="card-header">
-                            <p class="card-header-title">
-                                Name of School
-                             </p>
-                            </header>
-                            <div class="card-image">
-                                <figure class="image is-16x16 is-3by2">
-                                    <img src="" alt="Placeholder image">
-                                </figure>
-                            </div>   
-                            <footer class="card-footer">
-                                <p> Address: </p>
-                            </footer> 
-                        </div> 
+                        
                     </div>
             </div>       
 
-          <!-- <div id="afford-section">
-            <h2 class="top3-heading"> Top 3 Schools by affordability </h2>
-          </div>
-          <div id="rating-section">
-            <h2 class="top3-heading"> Top 3 Schools by Rating </h2>
-          </div> -->
+          
         </div>
      </div>
-  
+     <script>
+        function myMap() {
+        var mapProp= {
+          center:new google.maps.LatLng(-37.9, 144.66667),
+          zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("map"),mapProp);
+        }
+        </script>
   <script src="./assets/js/script.js"></script>
-  <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk91w3HUMHmGr0LsXGiLAif5ZqM6vofjU&libraries=places&v=weekly"
+  <script async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAk91w3HUMHmGr0LsXGiLAif5ZqM6vofjU&libraries=places&callback=initMap&v=weekly"
       defer
     ></script>
 </body>

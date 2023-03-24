@@ -4,6 +4,7 @@ var cityInputEl = document.getElementById("search-input");
 var optionInputEl = document.getElementById("school-type");
 var distCardsDivEl = document.getElementById("dist-cards");
 var cardTemplateDivEl = document.getElementById("card-template");
+var mapElement = document.getElementById("map");
 
 
 
@@ -19,8 +20,10 @@ searchButton.addEventListener('click', getApi);
 
 // Extracting the required temperature, wind and humidity information from weather JSON
 function populateData(places, map) {
-  while(distCardsDivEl.hasChildNodes()) {
-    distCardsDivEl.removeChild(distCardsDivEl.firstChild);
+  if(distCardsDivEl.hasChildNodes()) {
+    while(distCardsDivEl.hasChildNodes()) {
+      distCardsDivEl.removeChild(distCardsDivEl.firstChild);
+    }
   }
   for(var place of places) {
     if (place.geometry && place.geometry.location) {
@@ -31,11 +34,11 @@ function populateData(places, map) {
 
 // Function to get the school name from results
 function addSchool(school) {
-  var schoolName = school.name;
+  //var schoolName = school.name;
   service = new google.maps.places.PlacesService(map);
   request = {
     placeId: school.place_id,
-    fields: ['name', 'formatted_address', 'photos']
+    fields: ['name', 'formatted_address', 'photos', 'website']
   }
   service.getDetails(request, addSchoolDetails);
 }
@@ -60,10 +63,14 @@ function addSchoolElement(school) {
 
 
 function createHeader(school) {
-  p1 = document.createElement("p");
+  var p1 = document.createElement("p");
   p1.setAttribute("class", "card-header-title");
-  p1.textContent = school.name;
-  header = document.createElement("header");
+  //p1.textContent = school.name;
+  var schoolWebsite = document.createElement("a");
+  schoolWebsite.setAttribute("href", school.website);
+  schoolWebsite.textContent = school.name;
+  p1.appendChild(schoolWebsite);
+  var header = document.createElement("header");
   header.setAttribute("class", "card-header");
   header.appendChild(p1);
   return header;
@@ -74,7 +81,12 @@ function createCardImage(school) {
   var figure = document.createElement("figure");
   figure.setAttribute("class", "image is-4by3");
   var img = document.createElement("img");
-  img.setAttribute("src", school.photos[0].getUrl({'maxWidth': 400, 'maxHeight': 400}));
+  if(school.photos) {
+    img.setAttribute("src", school.photos[0].getUrl({'maxWidth': 400, 'maxHeight': 400}));
+  }
+  else {
+    img.setAttribute("src","https://raisingchildren.net.au/__data/assets/image/0015/102822/Secondary-schools-things-to-consider-narrow.jpg");
+  }
   img.setAttribute("alt", "Placeholder image");
   figure.append(img);
   cardImageDiv = document.createElement("div");
@@ -98,6 +110,7 @@ function createFooter(school) {
 
 // Function to initialise map
 function initMap() {
+    
     var locationName = cityInputEl.value;
     getLocationData(locationName);
     
@@ -106,9 +119,8 @@ function initMap() {
 // Get place information using location name
 function getLocationData(locationName) {
   //console.log("called");
-  var currentLocation = new google.maps.LatLng(0,0);
-  mapElement = document.getElementById('map');
-  map = new google.maps.Map(mapElement, {center: currentLocation, zoom: 10});
+  var currentLocation = new google.maps.LatLng(-37.9,0);
+  var map = new google.maps.Map(mapElement, {center: currentLocation, zoom: 10});
   var service = new google.maps.places.PlacesService(map);
   var request = {
     query: locationName,
@@ -125,7 +137,7 @@ function getSchoolsNearby(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     locationResult = results[0];
     const currentSearchLocation = {lat: locationResult.geometry.location.lat(), lng: locationResult.geometry.location.lng()};
-    const map = new google.maps.Map(document.getElementById("map"), {
+    var map = new google.maps.Map(mapElement, {
       center: locationResult.name,
       zoom: 17,
       mapID: "8d193001f940fde3",
@@ -150,3 +162,5 @@ function getSchoolsNearby(results, status) {
     });
   }
 }
+
+//window.initMap = initMap;
