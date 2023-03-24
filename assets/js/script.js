@@ -1,7 +1,7 @@
 
 var searchButton = document.getElementById('search-btn');
 var cityInputEl = document.getElementById("search-input");
-const listSchoolsDivEl = document.getElementById("list-schools");
+var distCardsDivEl = document.getElementById("dist-cards");
 
 
 // Function to get data from Google Maps API
@@ -15,9 +15,35 @@ searchButton.addEventListener('click', getApi);
 
 
 // Extracting the required temperature, wind and humidity information from weather JSON
-function populateData(data) {
-    console.log(data);
+function populateData(places, map) {
+  while(distCardsDivEl.hasChildNodes()) {
+    distCardsDivEl.removeChild(distCardsDivEl.firstChild);
+  }
+  for(var place of places) {
+    if (place.geometry && place.geometry.location) {
+      addSchool(place);
+    }
+  }
+}
+
+// Function to get the school name from results
+function addSchool(school) {
+  var schoolName = school.name;
+  service = new google.maps.places.PlacesService(map);
+  request = {
+    placeId: school.place_id,
+    fields: ['name', 'formatted_address', 'icon']
+  }
+  service.getDetails(request, addSchoolDetails);
+}
+
+// Send school details to HTML div cards
+function addSchoolDetails(school, status) {
+  if(status === google.maps.places.PlacesServiceStatus.OK) {
     
+    console.log(school);
+    //addSchoolElement(school);
+  }
 }
 
 // Function to initialise map
@@ -60,7 +86,9 @@ function getSchoolsNearby(results, status) {
       type: "school"
     }
     service.nearbySearch(searchParams, (results, status, pagination) => {
-      console.log(results);
+      //console.log(results);
+      if(status !== "OK" || !results) return;
+      populateData(results, map);
     });
   }
 }
