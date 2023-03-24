@@ -1,14 +1,15 @@
-#dist-section, #afford-section, #rating-section {
+#dist-section {
     display:flex;
-    height: 270px;
+    height: 1000px;
     width: 100%;
     background-color: bisque;
 }
 
-.top3-heading {
-    font-size: 20px;
-    color:rgb(4, 4, 84);
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
+.card {
+    
+    background-color: lightblue;
+    border: 2px;
 }
+
+
 

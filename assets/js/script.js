@@ -2,6 +2,8 @@
 var searchButton = document.getElementById('search-btn');
 var cityInputEl = document.getElementById("search-input");
 var distCardsDivEl = document.getElementById("dist-cards");
+var cardTemplateDivEl = document.getElementById("card-template");
+var schoolCount = 0;
 
 
 // Function to get data from Google Maps API
@@ -19,6 +21,7 @@ function populateData(places, map) {
   while(distCardsDivEl.hasChildNodes()) {
     distCardsDivEl.removeChild(distCardsDivEl.firstChild);
   }
+  schoolCount = 0;
   for(var place of places) {
     if (place.geometry && place.geometry.location) {
       addSchool(place);
@@ -42,9 +45,57 @@ function addSchoolDetails(school, status) {
   if(status === google.maps.places.PlacesServiceStatus.OK) {
     
     console.log(school);
-    //addSchoolElement(school);
+    addSchoolElement(school);
   }
 }
+
+function addSchoolElement(school) {
+  div = document.createElement("div");
+  div.setAttribute("class", "column is-one-quarter card mt-5 mr-6 ml-6");  
+  div.appendChild(createHeader(school));
+  div.appendChild(createCardImage(school));
+  div.appendChild(createFooter(school));
+  distCardsDivEl.appendChild(div);
+}
+
+
+function createHeader(school) {
+  p1 = document.createElement("p");
+  p1.setAttribute("class", "card-header-title");
+  p1.textContent = school.name;
+  header = document.createElement("header");
+  header.setAttribute("class", "card-header");
+  header.appendChild(p1);
+  return header;
+}
+
+
+function createCardImage(school) {
+  figure=document.createElement("figure");
+  figure.setAttribute("class", "image is-16x16 is-3by2");
+  figure.setAttribute("style", "height: 16px;padding-top: 0;");
+  img = document.createElement("img");
+  img.setAttribute("src", school.icon);
+  img.setAttribute("alt", "Placeholder image");
+  figure.append(img);
+  cardImageDiv = document.createElement("div");
+  cardImageDiv.setAttribute("class", "card-image");
+  cardImageDiv.appendChild(figure);
+  return cardImageDiv;
+}
+
+
+
+function createFooter(school) {
+  footer = document.createElement("footer");
+  footer.setAttribute("class", "card-footer");
+  p1 = document.createElement("p");
+  p1.textContent = school.formatted_address;
+  footer.append(p1);
+  return footer;
+}
+
+
 
 // Function to initialise map
 function initMap() {
