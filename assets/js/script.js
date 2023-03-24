@@ -35,7 +35,7 @@ function addSchool(school) {
   service = new google.maps.places.PlacesService(map);
   request = {
     placeId: school.place_id,
-    fields: ['name', 'formatted_address', 'icon']
+    fields: ['name', 'formatted_address', 'photos']
   }
   service.getDetails(request, addSchoolDetails);
 }
@@ -71,11 +71,10 @@ function createHeader(school) {
 
 
 function createCardImage(school) {
-  figure=document.createElement("figure");
-  figure.setAttribute("class", "image is-16x16 is-3by2");
-  figure.setAttribute("style", "height: 16px;padding-top: 0;");
-  img = document.createElement("img");
-  img.setAttribute("src", school.icon);
+  var figure = document.createElement("figure");
+  figure.setAttribute("class", "image is-4by3");
+  var img = document.createElement("img");
+  img.setAttribute("src", school.photos[0].getUrl({'maxWidth': 400, 'maxHeight': 400}));
   img.setAttribute("alt", "Placeholder image");
   figure.append(img);
   cardImageDiv = document.createElement("div");
