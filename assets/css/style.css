@@ -1,3 +1,6 @@
+.title {
+    color: rgb(3, 3, 45);
+}
 
 #dist-section {
     display:flex;

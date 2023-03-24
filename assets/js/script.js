@@ -1,4 +1,3 @@
-
 var searchButton = document.getElementById('search-btn');
 var cityInputEl = document.getElementById("search-input");
 var optionInputEl = document.getElementById("school-type");
@@ -36,8 +35,6 @@ function populateData(places, map) {
 
 // Function to get the school name from results
 function addSchool(school, map) {
-
-  //var schoolName = school.name;
   const currentLocation = {lat: 0, lng: 0};
   var map = new google.maps.Map(dummyMapElement, {center: currentLocation, zoom: 15});
   service = new google.maps.places.PlacesService(map);
@@ -51,8 +48,6 @@ function addSchool(school, map) {
 // Send school details to HTML div cards
 function addSchoolDetails(school, status) {
   if(status === google.maps.places.PlacesServiceStatus.OK) {
-    
-    //console.log(school);
     addSchoolElement(school);
   }
 }
@@ -70,7 +65,6 @@ function addSchoolElement(school) {
 function createHeader(school) {
   var p1 = document.createElement("p");
   p1.setAttribute("class", "card-header-title");
-  //p1.textContent = school.name;
   var schoolWebsite = document.createElement("a");
   schoolWebsite.setAttribute("href", school.website);
   schoolWebsite.textContent = school.name;
@@ -115,34 +109,28 @@ function createFooter(school) {
 
 // Function to initialise map
 function initMap() {
-    
-    var locationName = cityInputEl.value;
-    getLocationData(locationName);
+  var locationName = cityInputEl.value;
+  getLocationData(locationName);
     
 }
   
 // Get place information using location name
 function getLocationData(locationName) {
-  console.log("getLocationData called");
-  var currentLocation = new google.maps.LatLng(-37.9,144.6584747);
-  console.log("getLocationData : "+currentLocation);
+  var currentLocation = new google.maps.LatLng(-37.840935, 144.946457);
   var map = new google.maps.Map(mapElement, {center: currentLocation, zoom: 15});
   var service = new google.maps.places.PlacesService(map);
   var request = {
     query: locationName,
     fields: ['name', 'geometry']
-
   };
   service.findPlaceFromQuery(request, getSchoolsNearby);
 }
 
 // Get schools information from Google maps 
 function getSchoolsNearby(results, status) {
-  console.log("getSchoolsNearby called");
   var schoolSelect, schoolType;
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     locationResult = results[0];
-    console.log("Map Location : "+locationResult.geometry.location);
     const currentSearchLocation = {lat: locationResult.geometry.location.lat(), lng: locationResult.geometry.location.lng()};
     var map = new google.maps.Map(mapElement, {
       center: locationResult.geometry.location,
@@ -163,11 +151,10 @@ function getSchoolsNearby(results, status) {
       type: schoolType
     }
     service.nearbySearch(searchParams, (results, status, pagination) => {
-      //console.log(results);
       if(status !== "OK" || !results) return;
-      populateData(results, map);
+       populateData(results, map);
     });
   }
 }
 
-//window.initMap = initMap;
+
