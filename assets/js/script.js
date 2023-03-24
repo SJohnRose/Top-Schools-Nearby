@@ -5,6 +5,8 @@ var optionInputEl = document.getElementById("school-type");
 var distCardsDivEl = document.getElementById("dist-cards");
 var cardTemplateDivEl = document.getElementById("card-template");
 var mapElement = document.getElementById("map");
+var dummyMapElement = document.getElementById("dummyMap")
+var map = null;
 
 
 
@@ -27,14 +29,17 @@ function populateData(places, map) {
   }
   for(var place of places) {
     if (place.geometry && place.geometry.location) {
-      addSchool(place);
+      addSchool(place, map);
     }
   }
 }
 
 // Function to get the school name from results
-function addSchool(school) {
+function addSchool(school, map) {
+
   //var schoolName = school.name;
+  const currentLocation = {lat: 0, lng: 0};
+  var map = new google.maps.Map(dummyMapElement, {center: currentLocation, zoom: 15});
   service = new google.maps.places.PlacesService(map);
   request = {
     placeId: school.place_id,
@@ -47,7 +52,7 @@ function addSchool(school) {
 function addSchoolDetails(school, status) {
   if(status === google.maps.places.PlacesServiceStatus.OK) {
     
-    console.log(school);
+    //console.log(school);
     addSchoolElement(school);
   }
 }
@@ -118,9 +123,10 @@ function initMap() {
   
 // Get place information using location name
 function getLocationData(locationName) {
-  //console.log("called");
-  var currentLocation = new google.maps.LatLng(-37.9,0);
-  var map = new google.maps.Map(mapElement, {center: currentLocation, zoom: 10});
+  console.log("getLocationData called");
+  var currentLocation = new google.maps.LatLng(-37.9,144.6584747);
+  console.log("getLocationData : "+currentLocation);
+  var map = new google.maps.Map(mapElement, {center: currentLocation, zoom: 15});
   var service = new google.maps.places.PlacesService(map);
   var request = {
     query: locationName,
@@ -132,15 +138,16 @@ function getLocationData(locationName) {
 
 // Get schools information from Google maps 
 function getSchoolsNearby(results, status) {
-  //console.log("getSchools called");
+  console.log("getSchoolsNearby called");
   var schoolSelect, schoolType;
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     locationResult = results[0];
+    console.log("Map Location : "+locationResult.geometry.location);
     const currentSearchLocation = {lat: locationResult.geometry.location.lat(), lng: locationResult.geometry.location.lng()};
     var map = new google.maps.Map(mapElement, {
-      center: locationResult.name,
-      zoom: 17,
-      mapID: "8d193001f940fde3",
+      center: locationResult.geometry.location,
+      zoom: 15,
+      mapTypeId: 'roadmap',
     });
     const service = new google.maps.places.PlacesService(map);
     schoolSelect = optionInputEl.value;
