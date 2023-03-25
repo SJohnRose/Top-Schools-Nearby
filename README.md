@@ -33,4 +33,4 @@ The following images shows the application's appearance and functionality: ![Upl
 ## How to access the Top Schools Nearby app?
 Please use the following link: https://github.com/SJohnRose/Top-Schools-Nearby 
 
-To access the deployed app: 
+To access the deployed app: https://sjohnrose.github.io/Top-Schools-Nearby/ 
