@@ -14,16 +14,16 @@ I WANT to see the list of nearby schools in the area
 SO THAT I can research the schools for suitability.
 
 ## Acceptance Criteria
-GIVEN a Top Schools Nearby website with form inputs
-WHEN I search for a suburb
-THEN I am presented with the list of schools in the suburb
-WHEN I select the primary school option
-THEN I am presented with the details of the primary schools with name, address, photo and a link to the website.
-WHEN I select the secondary school option
-THEN I am presented with the details of the secondary schools with name, address, photo and a link to the website.
-WHEN I open the website
-THEN I am presented with a map showing the schools marked on the map.
-
+GIVEN a Top Schools Nearby website with form inputs  
+WHEN I search for a suburb  
+THEN I am presented with the list of schools in the suburb  
+WHEN I select the primary school option  
+THEN I am presented with the details of the primary schools with name, address, photo and a link to the website.  
+WHEN I select the secondary school option  
+THEN I am presented with the details of the secondary schools with name, address, photo and a link to the website.  
+WHEN I open the website  
+THEN I am presented with a map showing the schools marked on the map.  
+  
 
 ## Mock-up
 The following images shows the application's appearance and functionality: ![Uploading TopSchools-screenshot1.PNG…]()
